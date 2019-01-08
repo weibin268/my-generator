@@ -2,8 +2,7 @@ package com.zhuang.generator;
 
 import com.zhuang.data.jdbc.JdbcUtils;
 import com.zhuang.data.orm.mapping.EntityMapping;
-import com.zhuang.data.util.DataTypeUtils;
-import com.zhuang.generator.config.ZhuangGeneratorProperties;
+import com.zhuang.generator.config.MyGeneratorProperties;
 import com.zhuang.generator.util.DateUtils;
 import com.zhuang.generator.util.PathUtils;
 import com.zhuang.generator.util.StringUtils;
@@ -25,7 +24,7 @@ public abstract class CodeGenerator {
     public static final String DATA_MODEL_KEY_PARAMS_NOW_DATE_TIME = "nowDateTime";
     public static final String DATA_MODEL_KEY_PARAMS_NOW_DATE = "nowDate";
 
-    private ZhuangGeneratorProperties zhuangGeneratorProperties;
+    private MyGeneratorProperties myGeneratorProperties;
     private Connection connection;
     private String templatePath;
     private String outputPath;
@@ -44,7 +43,7 @@ public abstract class CodeGenerator {
 
     public String getTemplatePath() {
         if (templatePath != null) return templatePath;
-        String templatePath = zhuangGeneratorProperties.getTemplatePath();
+        String templatePath = myGeneratorProperties.getTemplatePath();
         if (templatePath != null && !templatePath.isEmpty()) {
             return PathUtils.getAbsolutePath(templatePath);
         } else {
@@ -58,7 +57,7 @@ public abstract class CodeGenerator {
 
     public String getOutputPath() {
         if (outputPath != null) return outputPath;
-        String outputPath = zhuangGeneratorProperties.getOutputPath();
+        String outputPath = myGeneratorProperties.getOutputPath();
         if (outputPath != null && !outputPath.isEmpty()) {
             return PathUtils.getAbsolutePath(outputPath);
         } else {
@@ -72,7 +71,7 @@ public abstract class CodeGenerator {
 
     public String getBasePackage() {
         if (basePackage != null) return basePackage;
-        return zhuangGeneratorProperties.getBasePackage();
+        return myGeneratorProperties.getBasePackage();
     }
 
     public void setBasePackage(String basePackage) {
@@ -81,7 +80,7 @@ public abstract class CodeGenerator {
 
     public String getModuleName() {
         if (moduleName != null) return moduleName;
-        return zhuangGeneratorProperties.getModuleName();
+        return myGeneratorProperties.getModuleName();
     }
 
     public void setModuleName(String moduleName) {
@@ -90,7 +89,7 @@ public abstract class CodeGenerator {
 
     public String getAuthorName() {
         if (authorName != null) return authorName;
-        return zhuangGeneratorProperties.getAuthorName();
+        return myGeneratorProperties.getAuthorName();
     }
 
     public void setAuthorName(String authorName) {
@@ -98,7 +97,7 @@ public abstract class CodeGenerator {
     }
 
     public CodeGenerator() {
-        zhuangGeneratorProperties = new ZhuangGeneratorProperties();
+        myGeneratorProperties = new MyGeneratorProperties();
     }
 
     public void generate(String[] tableNames) {
