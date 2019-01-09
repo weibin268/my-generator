@@ -51,8 +51,6 @@
             <groupId>com.github.weibin268</groupId>
             <artifactId>my-data</artifactId>
             <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/my-data-1.0.0.jar</systemPath>
         </dependency>
 
         <dependency>
