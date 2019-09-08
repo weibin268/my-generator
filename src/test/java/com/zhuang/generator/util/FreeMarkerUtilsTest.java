@@ -18,8 +18,8 @@ public class FreeMarkerUtilsTest {
         dataModel.put("stringUtils", new StringUtils());
         dataModel.put("params",params);
         //String tempalteName="test.ftl";
-        //String tempalteName="model.java.ftl";
-        String tempalteName="model.java.ftl";
+        //String tempalteName="entity.java.ftl";
+        String tempalteName="entity.java.ftl";
         //String tempalteName = "controller.java.ftl";
         //String tempalteName = "service.java.ftl";
         System.out.println(FreeMarkerUtils.getOutput(FreeMarkerUtilsTest.class.getResource("/code-templates").getPath(), tempalteName, dataModel));

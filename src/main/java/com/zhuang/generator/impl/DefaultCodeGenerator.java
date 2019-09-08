@@ -19,8 +19,8 @@ public class DefaultCodeGenerator extends CodeGenerator {
         String javaPath = "/src/main/java";
         String viewPath = "/src/main/resources/views";
         String filePath = templateName;
-        if (templateName.equalsIgnoreCase("model.java.ftl")) {
-            filePath = PathUtils.combine(javaPath, packagePath, getModuleName(), "model", entityMapping.getEntityName()) + ".java";
+        if (templateName.equalsIgnoreCase("entity.java.ftl")) {
+            filePath = PathUtils.combine(javaPath, packagePath, getModuleName(), "entity", entityMapping.getEntityName()) + ".java";
         } else if (templateName.equalsIgnoreCase("service.java.ftl")) {
             filePath = PathUtils.combine(javaPath, packagePath, getModuleName(), "service", entityMapping.getEntityName()) + "Service.java";
         } else if (templateName.equalsIgnoreCase("controller.java.ftl")) {

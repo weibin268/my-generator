@@ -1,4 +1,4 @@
-package ${params.basePackage}.${params.moduleName}.model;
+package ${params.basePackage}.${params.moduleName}.entity;
 
 import java.util.Date;
 import com.zhuang.data.orm.annotation.Id;
