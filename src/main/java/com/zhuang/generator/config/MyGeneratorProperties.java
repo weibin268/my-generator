@@ -9,13 +9,13 @@ public class MyGeneratorProperties {
     public final static String DEFAULT_CONFIG_FILE_PATH = "config/my-generator.properties";
 
     private Properties properties;
-    private final static String IMPLEMENT_CLASS = "my.generator.implement_class";
+    private final static String IMPLEMENT_CLASS = "my.generator.implement-class";
     private final static String TEMPLATE_PATH = "my.generator.template-path";
     private final static String BASE_PACKAGE = "my.generator.base-package";
     private final static String OUTPUT_PATH = "my.generator.output-path";
     private final static String MODULE_NAME = "my.generator.module-name";
     private final static String AUTHOR_NAME = "my.generator.author-name";
-    private final static String TABLE_NAMES = "my.generator.table_names";
+    private final static String TABLE_NAMES = "my.generator.table-names";
 
     public MyGeneratorProperties() {
         this(DEFAULT_CONFIG_FILE_PATH);
