@@ -2,6 +2,7 @@ package com.zhuang.generator.impl;
 
 import com.zhuang.data.orm.mapping.EntityMapping;
 import com.zhuang.generator.CodeGenerator;
+import com.zhuang.generator.config.MyGeneratorProperties;
 import com.zhuang.generator.util.FileUtils;
 import com.zhuang.generator.util.FreeMarkerUtils;
 import com.zhuang.generator.util.PathUtils;
@@ -10,6 +11,10 @@ import com.zhuang.generator.util.StringUtils;
 import java.util.Map;
 
 public class DefaultCodeGenerator extends CodeGenerator {
+
+    public DefaultCodeGenerator() {
+        super(new MyGeneratorProperties());
+    }
 
     @Override
     public void generate(String templateName, Map dataModel) {

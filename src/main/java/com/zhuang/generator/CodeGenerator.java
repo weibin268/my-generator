@@ -105,8 +105,8 @@ public abstract class CodeGenerator {
         this.authorName = authorName;
     }
 
-    public CodeGenerator() {
-        myGeneratorProperties = new MyGeneratorProperties();
+    public CodeGenerator(MyGeneratorProperties myGeneratorProperties) {
+        this.myGeneratorProperties = myGeneratorProperties;
     }
 
     public void generate() {
