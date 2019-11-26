@@ -1,5 +1,6 @@
 package com.zhuang.generator;
 
+import com.zhuang.data.exception.GetConnectionException;
 import com.zhuang.data.jdbc.JdbcUtils;
 import com.zhuang.data.orm.mapping.EntityMapping;
 import com.zhuang.generator.config.MyGeneratorProperties;
@@ -9,6 +10,8 @@ import com.zhuang.generator.util.StringUtils;
 
 import java.io.File;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +37,13 @@ public abstract class CodeGenerator {
 
     public Connection getConnection() {
         if (connection != null) return connection;
-        return JdbcUtils.getConnection();
+        try {
+            Class.forName(myGeneratorProperties.getJdbcDriver());
+            connection = DriverManager.getConnection(myGeneratorProperties.getJdbcUrl(), myGeneratorProperties.getJdbcUsername(), myGeneratorProperties.getJdbcPassword());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return connection;
     }
 
     public void setConnection(Connection connection) {
