@@ -1,7 +1,6 @@
 package com.zhuang.generator.config;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
 public class MyGeneratorProperties {
@@ -26,9 +25,20 @@ public class MyGeneratorProperties {
     }
 
     public MyGeneratorProperties(String configFilePath) {
-        InputStream inputStream = null;
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(configFilePath);
+        loadProperties(inputStream);
+    }
+
+    public MyGeneratorProperties(File file){
         try {
-            inputStream = this.getClass().getClassLoader().getResourceAsStream(configFilePath);
+            loadProperties(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadProperties(InputStream inputStream) {
+        try {
             properties = new Properties();
             properties.load(inputStream);
         } catch (IOException e) {
