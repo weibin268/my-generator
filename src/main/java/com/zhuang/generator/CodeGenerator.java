@@ -100,6 +100,10 @@ public abstract class CodeGenerator {
         myGeneratorProperties = new MyGeneratorProperties();
     }
 
+    public void generate() {
+        generate(myGeneratorProperties.getTableNames());
+    }
+
     public void generate(String[] tableNames) {
         for (String tableName : tableNames) {
             Map dataModel = new HashMap();

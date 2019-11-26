@@ -2,14 +2,44 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <groupId>com.github.weibin268</groupId>
     <artifactId>my-generator</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-
     <name>my-generator</name>
     <description>代码生成器</description>
     <url>https://github.com/weibin268/my-generator</url>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>weibin268</id>
+            <name>zhuangweibin</name>
+            <email>448075543@qq.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:ssh://github.com/weibin268/my-data.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/weibin268/my-data.git</developerConnection>
+        <url>https://github.com/weibin268/my-data</url>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <build>
         <resources>
@@ -76,6 +106,19 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
         </dependency>
+        <!--begin maven plugin-->
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>3.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--end maven plugin-->
     </dependencies>
 
 </project>

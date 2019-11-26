@@ -9,11 +9,13 @@ public class MyGeneratorProperties {
     public final static String DEFAULT_CONFIG_FILE_PATH = "config/my-generator.properties";
 
     private Properties properties;
+    private final static String IMPLEMENT_CLASS = "my.generator.implement_class";
     private final static String TEMPLATE_PATH = "my.generator.template-path";
     private final static String BASE_PACKAGE = "my.generator.base-package";
     private final static String OUTPUT_PATH = "my.generator.output-path";
     private final static String MODULE_NAME = "my.generator.module-name";
     private final static String AUTHOR_NAME = "my.generator.author-name";
+    private final static String TABLE_NAMES = "my.generator.table_names";
 
     public MyGeneratorProperties() {
         this(DEFAULT_CONFIG_FILE_PATH);
@@ -39,6 +41,10 @@ public class MyGeneratorProperties {
         }
     }
 
+    public String getImplementClass() {
+        return properties.getProperty(IMPLEMENT_CLASS);
+    }
+
     public String getTemplatePath() {
         return properties.getProperty(TEMPLATE_PATH);
     }
@@ -57,6 +63,10 @@ public class MyGeneratorProperties {
 
     public String getAuthorName() {
         return properties.getProperty(AUTHOR_NAME);
+    }
+
+    public String getTableNames() {
+        return properties.getProperty(TABLE_NAMES);
     }
 
 }
