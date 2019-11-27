@@ -146,7 +146,6 @@ public abstract class CodeGenerator {
             dataModel.put(DATA_MODEL_KEY_STRING_UTILS, new StringUtils());
             dataModel.put(DATA_MODEL_KEY_PARAMS, params);
             List<String> templateFileList = FileUtils.getFileNameListByFolderPath(getTemplatePath());
-            System.out.println();
             System.out.println(">>>>>generate for '" + tableName + "'");
             for (String templateFile : templateFileList) {
                 String filePath = resolveFilePath(templateFile, dataModel);
@@ -161,7 +160,6 @@ public abstract class CodeGenerator {
                 System.out.println("" + fullFilePath + " < " + templateFile + "");
                 FileUtils.writeText(fullFilePath, fileContent);
             }
-            System.out.println("<<<<<generate for '" + tableName + "'");
             System.out.println();
         }
     }
