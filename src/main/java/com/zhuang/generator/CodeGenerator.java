@@ -149,6 +149,7 @@ public abstract class CodeGenerator {
             System.out.println(">>>>>generate for '" + tableName + "'");
             for (String templateFile : templateFileList) {
                 String filePath = resolveFilePath(templateFile, dataModel);
+                if (filePath == null) continue;
                 String fullFilePath = PathUtils.combine(getOutputPath(), filePath);
                 String templatePath;
                 if (FileUtils.isJarPath(getTemplatePath())) {
