@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class CodeGenerator {
@@ -144,19 +145,17 @@ public abstract class CodeGenerator {
             dataModel.put(DATA_MODEL_KEY_ENTITY, entityMapping);
             dataModel.put(DATA_MODEL_KEY_STRING_UTILS, new StringUtils());
             dataModel.put(DATA_MODEL_KEY_PARAMS, params);
-            File templateDir = null;
-            try {
-                templateDir = ResourceUtils.getFile(getTemplatePath());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            //File templateDir = new File(getTemplatePath());
-            File[] templateFiles = templateDir.listFiles();
-            for (File templateFile : templateFiles) {
-                String filePath = resolveFilePath(templateFile.getName(), dataModel);
+            List<String> templateFileList = FileUtils.getFileNameListByFolderPath(getTemplatePath());
+            for (String templateFile : templateFileList) {
+                String filePath = resolveFilePath(templateFile, dataModel);
                 String fullFilePath = PathUtils.combine(getOutputPath(), filePath);
-                System.out.println(fullFilePath);
-                String fileContent = FreeMarkerUtils.getOutput(getTemplatePath(), templateFile.getName(), dataModel);
+                String templatePath;
+                if (FileUtils.isJarPath(getTemplatePath())) {
+                    templatePath = "classpath:" + getTemplatePath().split("!")[1];
+                } else {
+                    templatePath = getTemplatePath();
+                }
+                String fileContent = FreeMarkerUtils.getOutput(templatePath, templateFile, dataModel);
                 FileUtils.writeText(fullFilePath, fileContent);
             }
         }

@@ -92,4 +92,48 @@ public class FileUtils {
     public static String getLineSeparator() {
         return System.getProperty("line.separator");
     }
+
+    public static List<String> getFileNameListByFolderPath(String folderPath) {
+        if (isJarPath(folderPath)) {
+            return getFileNameListByFolderPathInJar(folderPath);
+        } else {
+            File file = new File(folderPath);
+            File[] files = file.listFiles();
+            List<String> fileNameList = new ArrayList<>();
+            for (int i = 0; i < files.length; i++) {
+                fileNameList.add(files[i].getName());
+            }
+            return fileNameList;
+        }
+    }
+
+    public static List<String> getFileNameListByFolderPathInJar(String folderPathInJar) {
+        List<String> result = new ArrayList<>();
+        String jarPath = folderPathInJar.substring(folderPathInJar.indexOf("/"), folderPathInJar.indexOf("!"));
+        String folder = folderPathInJar.substring(folderPathInJar.indexOf("!") + 1).replace("/", "");
+        System.out.println(folder);
+        try {
+            JarFile jarFile = new JarFile(URLDecoder.decode(jarPath, "UTF-8"));
+            Enumeration<JarEntry> jarEntries = jarFile.entries();
+            while (jarEntries.hasMoreElements()) {
+                JarEntry jarEntry = jarEntries.nextElement();
+                String resourceName = jarEntry.getName();
+                if (!resourceName.contains(folder)) continue;
+                resourceName = resourceName.replace(folder, "");
+                resourceName = resourceName.replace("/", "");
+                if ("".equals(resourceName)) continue;
+                result.add(resourceName);
+            }
+        } catch (Exception e) {
+        }
+        return result;
+    }
+
+    public static boolean isJarPath(String path) {
+        if (path.contains("jar")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

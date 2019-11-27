@@ -109,6 +109,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
             <version>5.2.0.RELEASE</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
