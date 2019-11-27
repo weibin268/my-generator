@@ -12,7 +12,6 @@ public class MyGeneratorProperties {
     public final static String JDBC_URL = "my.generator.jdbc-url";
     public final static String JDBC_USERNAME = "my.generator.jdbc-username";
     public final static String JDBC_PASSWORD = "my.generator.jdbc-password";
-    private final static String IMPLEMENT_CLASS = "my.generator.implement-class";
     private final static String TEMPLATE_PATH = "my.generator.template-path";
     private final static String BASE_PACKAGE = "my.generator.base-package";
     private final static String OUTPUT_PATH = "my.generator.output-path";
@@ -69,10 +68,6 @@ public class MyGeneratorProperties {
 
     public String getJdbcPassword(){
         return properties.getProperty(JDBC_PASSWORD);
-    }
-
-    public String getImplementClass() {
-        return properties.getProperty(IMPLEMENT_CLASS);
     }
 
     public String getTemplatePath() {
