@@ -72,14 +72,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>com.github.weibin268</groupId>
+            <artifactId>my-data</artifactId>
+            <version>1.0.8</version>
+        </dependency>
+        <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>2.3.28</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.weibin268</groupId>
-            <artifactId>my-data</artifactId>
-            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
