@@ -111,7 +111,6 @@ public class FileUtils {
         List<String> result = new ArrayList<>();
         String jarPath = folderPathInJar.substring(folderPathInJar.indexOf("/"), folderPathInJar.indexOf("!"));
         String folder = folderPathInJar.substring(folderPathInJar.indexOf("!") + 1).replace("/", "");
-        System.out.println(folder);
         try {
             JarFile jarFile = new JarFile(URLDecoder.decode(jarPath, "UTF-8"));
             Enumeration<JarEntry> jarEntries = jarFile.entries();
