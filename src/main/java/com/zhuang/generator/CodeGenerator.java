@@ -156,6 +156,7 @@ public abstract class CodeGenerator {
                     templatePath = getTemplatePath();
                 }
                 String fileContent = FreeMarkerUtils.getOutput(templatePath, templateFile, dataModel);
+                System.out.println("begin write file: " + fullFilePath);
                 FileUtils.writeText(fullFilePath, fileContent);
             }
         }
