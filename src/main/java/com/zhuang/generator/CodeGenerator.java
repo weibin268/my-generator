@@ -1,17 +1,12 @@
 package com.zhuang.generator;
 
-import com.zhuang.data.exception.GetConnectionException;
-import com.zhuang.data.jdbc.JdbcUtils;
 import com.zhuang.data.orm.mapping.EntityMapping;
 import com.zhuang.generator.config.MyGeneratorProperties;
-import com.zhuang.generator.util.DateUtils;
-import com.zhuang.generator.util.PathUtils;
-import com.zhuang.generator.util.StringUtils;
+import com.zhuang.generator.util.*;
 
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -87,6 +82,10 @@ public abstract class CodeGenerator {
         this.basePackage = basePackage;
     }
 
+    public String getBasePackagePath() {
+        return PathUtils.getPathByPackage(getBasePackage());
+    }
+
     public String getModuleName() {
         if (moduleName != null) return moduleName;
         return myGeneratorProperties.getModuleName();
@@ -105,12 +104,28 @@ public abstract class CodeGenerator {
         this.authorName = authorName;
     }
 
+    public String getJavaPath() {
+        return "/src/main/java";
+    }
+
+    public EntityMapping getEntityMapping(Map dataModel){
+        return (EntityMapping) dataModel.get(DATA_MODEL_KEY_ENTITY);
+    }
+
+    public StringUtils getStringUtils(Map dataModel) {
+        return (StringUtils) dataModel.get(DATA_MODEL_KEY_STRING_UTILS);
+    }
+
     public CodeGenerator(MyGeneratorProperties myGeneratorProperties) {
         this.myGeneratorProperties = myGeneratorProperties;
     }
 
     public void generate() {
         generate(myGeneratorProperties.getTableNames());
+    }
+
+    public void generate(String tableNames) {
+        generate(tableNames.split(","));
     }
 
     public void generate(String[] tableNames) {
@@ -129,15 +144,16 @@ public abstract class CodeGenerator {
             File templateDir = new File(getTemplatePath());
             File[] templateFiles = templateDir.listFiles();
             for (File templateFile : templateFiles) {
-                generate(templateFile.getName(), dataModel);
+                String filePath = resolveFilePath(templateFile.getName(), dataModel);
+
+                String fullFilePath = PathUtils.combine(getOutputPath(), filePath);
+                System.out.println(fullFilePath);
+                String fileContent = FreeMarkerUtils.getOutput(getTemplatePath(), templateFile.getName(), dataModel);
+                FileUtils.writeText(fullFilePath, fileContent);
             }
         }
     }
 
-    public void generate(String tableNames) {
-        generate(tableNames.split(","));
-    }
-
-    public abstract void generate(String templateName, Map dataModel);
+    public abstract String resolveFilePath(String templateName, Map dataModel);
 
 }

@@ -3,8 +3,6 @@ package com.zhuang.generator.impl;
 import com.zhuang.generator.CodeGenerator;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class DefaultCodeGeneratorTest {
 
     @Test
@@ -12,5 +10,4 @@ public class DefaultCodeGeneratorTest {
         CodeGenerator codeGenerator= new DefaultCodeGenerator();
         codeGenerator.generate();
     }
-
 }
