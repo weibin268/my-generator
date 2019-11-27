@@ -160,7 +160,7 @@ public abstract class CodeGenerator {
                 System.out.println("" + fullFilePath + " < " + templateFile + "");
                 FileUtils.writeText(fullFilePath, fileContent);
             }
-            System.out.println();
+            System.out.println("<<<<<generate for '" + tableName + "'");
         }
     }
 
