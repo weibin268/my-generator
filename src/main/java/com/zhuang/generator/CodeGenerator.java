@@ -3,8 +3,11 @@ package com.zhuang.generator;
 import com.zhuang.data.orm.mapping.EntityMapping;
 import com.zhuang.generator.config.MyGeneratorProperties;
 import com.zhuang.generator.util.*;
+import freemarker.template.Configuration;
+import org.springframework.util.ResourceUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Date;
@@ -108,7 +111,7 @@ public abstract class CodeGenerator {
         return "/src/main/java";
     }
 
-    public EntityMapping getEntityMapping(Map dataModel){
+    public EntityMapping getEntityMapping(Map dataModel) {
         return (EntityMapping) dataModel.get(DATA_MODEL_KEY_ENTITY);
     }
 
@@ -141,11 +144,16 @@ public abstract class CodeGenerator {
             dataModel.put(DATA_MODEL_KEY_ENTITY, entityMapping);
             dataModel.put(DATA_MODEL_KEY_STRING_UTILS, new StringUtils());
             dataModel.put(DATA_MODEL_KEY_PARAMS, params);
-            File templateDir = new File(getTemplatePath());
+            File templateDir = null;
+            try {
+                templateDir = ResourceUtils.getFile(getTemplatePath());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            //File templateDir = new File(getTemplatePath());
             File[] templateFiles = templateDir.listFiles();
             for (File templateFile : templateFiles) {
                 String filePath = resolveFilePath(templateFile.getName(), dataModel);
-
                 String fullFilePath = PathUtils.combine(getOutputPath(), filePath);
                 System.out.println(fullFilePath);
                 String fileContent = FreeMarkerUtils.getOutput(getTemplatePath(), templateFile.getName(), dataModel);
