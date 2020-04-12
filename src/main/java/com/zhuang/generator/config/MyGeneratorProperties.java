@@ -15,6 +15,7 @@ public class MyGeneratorProperties {
     private final static String TEMPLATE_PATH = "my.generator.template-path";
     private final static String BASE_PACKAGE = "my.generator.base-package";
     private final static String OUTPUT_PATH = "my.generator.output-path";
+    private final static String APP_NAME = "my.generator.app-name";
     private final static String MODULE_NAME = "my.generator.module-name";
     private final static String AUTHOR_NAME = "my.generator.author-name";
     private final static String TABLE_NAMES = "my.generator.table-names";
@@ -80,6 +81,10 @@ public class MyGeneratorProperties {
 
     public String getOutputPath() {
         return properties.getProperty(OUTPUT_PATH);
+    }
+
+    public String getAppName() {
+        return properties.getProperty(APP_NAME);
     }
 
     public String getModuleName() {

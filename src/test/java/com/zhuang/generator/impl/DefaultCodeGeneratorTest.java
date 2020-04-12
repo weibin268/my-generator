@@ -10,4 +10,5 @@ public class DefaultCodeGeneratorTest {
         CodeGenerator codeGenerator= new DefaultCodeGenerator();
         codeGenerator.generate();
     }
+
 }

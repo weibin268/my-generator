@@ -3,11 +3,7 @@ package com.zhuang.generator;
 import com.zhuang.data.orm.mapping.EntityMapping;
 import com.zhuang.generator.config.MyGeneratorProperties;
 import com.zhuang.generator.util.*;
-import freemarker.template.Configuration;
-import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Date;
@@ -21,6 +17,7 @@ public abstract class CodeGenerator {
     public static final String DATA_MODEL_KEY_STRING_UTILS = "stringUtils";
     public static final String DATA_MODEL_KEY_PARAMS = "params";
     public static final String DATA_MODEL_KEY_PARAMS_BASE_PACKAGE = "basePackage";
+    public static final String DATA_MODEL_KEY_PARAMS_APP_NAME = "appName";
     public static final String DATA_MODEL_KEY_PARAMS_MODULE_NAME = "moduleName";
     public static final String DATA_MODEL_KEY_PARAMS_AUTHOR_NAME = "authorName";
     public static final String DATA_MODEL_KEY_PARAMS_NOW_DATE_TIME = "nowDateTime";
@@ -31,6 +28,7 @@ public abstract class CodeGenerator {
     private String templatePath;
     private String outputPath;
     private String basePackage;
+    private String appName;
     private String moduleName;
     private String authorName;
 
@@ -90,6 +88,15 @@ public abstract class CodeGenerator {
         return PathUtils.getPathByPackage(getBasePackage());
     }
 
+    public String getAppName() {
+        if (appName != null) return appName;
+        return myGeneratorProperties.getAppName();
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
     public String getModuleName() {
         if (moduleName != null) return moduleName;
         return myGeneratorProperties.getModuleName();
@@ -137,6 +144,7 @@ public abstract class CodeGenerator {
             Map dataModel = new HashMap();
             Map params = new HashMap();
             params.put(DATA_MODEL_KEY_PARAMS_BASE_PACKAGE, getBasePackage());
+            params.put(DATA_MODEL_KEY_PARAMS_APP_NAME, getAppName());
             params.put(DATA_MODEL_KEY_PARAMS_MODULE_NAME, getModuleName());
             params.put(DATA_MODEL_KEY_PARAMS_AUTHOR_NAME, getAuthorName());
             params.put(DATA_MODEL_KEY_PARAMS_NOW_DATE_TIME, DateUtils.parseString(new Date()));
